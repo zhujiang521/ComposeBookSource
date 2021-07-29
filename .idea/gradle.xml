@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="testRunner" value="GRADLE" />
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/eight" />
+            <option value="$PROJECT_DIR$/five" />
+            <option value="$PROJECT_DIR$/four" />
+            <option value="$PROJECT_DIR$/nine" />
+            <option value="$PROJECT_DIR$/one" />
+            <option value="$PROJECT_DIR$/seven" />
+            <option value="$PROJECT_DIR$/six" />
+            <option value="$PROJECT_DIR$/ten" />
+            <option value="$PROJECT_DIR$/three" />
+            <option value="$PROJECT_DIR$/two" />
+          </set>
+        </option>
+        <option name="resolveModulePerSourceSet" value="false" />
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

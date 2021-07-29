@@ -1,0 +1,60 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+
+android {
+    compileSdkVersion cfgs.compileSdkVersion
+    buildToolsVersion cfgs.buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.zj.six"
+        minSdkVersion cfgs.minSdkVersion
+        targetSdkVersion cfgs.targetSdkVersion
+        versionCode cfgs.versionCode
+        versionName cfgs.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+        useIR = true
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion compose_version
+        kotlinCompilerVersion kotlin_version
+    }
+}
+
+dependencies {
+
+    implementation des.coreKtx
+    implementation des.appcompat
+    implementation des.material
+    implementation "androidx.compose.ui:ui:$compose_version"
+    implementation "androidx.compose.material:material:$compose_version"
+    implementation "androidx.compose.ui:ui-tooling:$compose_version"
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-alpha02'
+    implementation 'androidx.activity:activity-compose:1.3.0'
+    testImplementation des.junit
+    androidTestImplementation des.extJunit
+    androidTestImplementation des.espressoCore
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
+}

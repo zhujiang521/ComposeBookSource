@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Play Android</string>
+    <string name="no_network">The current network is unavailable</string>
+    <string name="exit_program">Press again to exit the program</string>
+    <string name="no_browsing_history">There are currently no browsing history</string>
+    <string name="no_more_data">No more data</string>
+    <string name="collection_cancelled_successfully">Cancel Bookmarked</string>
+    <string name="failed_to_cancel_collection">Unsubscribe failure</string>
+    <string name="collection_successful">Bookmarked</string>
+    <string name="collection_failed">Favorite Failed</string>
+    <string name="bookmarking">Bookmarking</string>
+    <string name="unfavorite">Unfavorite</string>
+    <string name="collection">Collect</string>
+    <string name="cancel_collection">Unfavorite</string>
+    <string name="my_collection">My collection</string>
+    <string name="page_is_not_collection">The current page can not favorites</string>
+    <string name="copy_succeeded">Copy the success can be directly pasted</string>
+    <string name="not_currently_logged_in">Currently logged</string>
+    <string name="login_success">Login successful</string>
+    <string name="register_success">Registration success</string>
+    <string name="account_password_mismatch">Account password does not match!</string>
+    <string name="user_name_already_registered">User name has been registered!</string>
+    <string name="enter_name_format">Please enter the correct user name format</string>
+    <string name="enter_password_format">Please enter the correct password format</string>
+    <string name="log_out">Sign out</string>
+    <string name="return_login">Return to login</string>
+    <string name="sure_log_out">Sure you want to log off?</string>
+    <string name="enter_name">Please input Username</string>
+    <string name="enter_password">Please enter your password</string>
+    <string name="login">Log in</string>
+    <string name="register_account">Register an account</string>
+    <string name="no_login">Not Logged</string>
+    <string name="click_login">Click to login</string>
+    <string name="search">Search</string>
+    <string name="keyword_not_null">Search keyword can not be empty</string>
+    <string name="keyword_null">No data on %s, replace keyword search</string>
+    <string name="home_page">Home</string>
+    <string name="project">Project</string>
+    <string name="official_account">Official</string>
+    <string name="mine">Mine</string>
+    <string name="mine_points">My scores</string>
+    <string name="mine_blog">My blog</string>
+    <string name="mine_nuggets">Nuggets</string>
+    <string name="mine_github">My Github</string>
+    <string name="github">Github</string>
+    <string name="browsing_history">Browsing History</string>
+    <string name="about_me">About me</string>
+    <string name="my_share">My Share</string>
+    <string name="copy_link">Copy Link</string>
+    <string name="browser_open">Browser opens</string>
+    <string name="tripartite_sharing">Tripartite Share</string>
+    <string name="author_trends">Dynamic author</string>
+    <string name="refresh">Refresh</string>
+    <string name="add_share">New Share</string>
+    <string name="enter_article_title">Please enter the title of the article</string>
+    <string name="enter_article_link">Please enter a link to the article</string>
+    <string name="submit">Submit</string>
+    <string name="author_share">The authors share</string>
+    <string name="add">New</string>
+    <string name="no_data">No data</string>
+    <string name="man_info">Level %d ranking %s points %d</string>
+    <string name="add_reason">Reason %s</string>
+    <string name="rank">%d points</string>
+    <string name="ranking_list">Leaderboard</string>
+    <string name="ranking">The first %s name</string>
+    <string name="coin">%d points</string>
+    <string name="lever">%d level</string>
+    <string name="please_enter_keywords">Please enter keywords</string>
+    <string name="we_chat_official_account">Here is my WeChat official account. I want to pay attention to it.</string>
+    <string name="motto">As long as you start, it\'s never too late. As long as you work hard, it\'s possible</string>
+    <string name="cancel">Cancel</string>
+    <string name="sure">Sure</string>
+    <string name="topping">Topping</string>
+    <string name="newest">Newest</string>
+
+    <string name="title_cannot_empty">Title cannot be empty</string>
+    <string name="link_cannot_empty">Link cannot be empty</string>
+    <string name="link_format_error">Link format input error</string>
+    <string name="share_success">Share success</string>
+    <string name="no_app">There are no apps installed that support opening this page!</string>
+
+    <string name="static_disabled_message_search">Search for technical articles you want!</string>
+    <string name="static_shortcut_long_label_search">Search for technical articles</string>
+    <string name="static_shortcut_short_label_search">Search for articles</string>
+
+    <string name="static_disabled_message_add_share">Add articles you want to share!</string>
+    <string name="static_shortcut_long_label_add_share">New article sharing</string>
+    <string name="static_shortcut_short_label_add_share">New share</string>
+
+    <string name="edit_profile">Edit Profile</string>
+
+
+    <string name="feature_not_available">Feature not available</string>
+    <string name="dismiss">DISMISS</string>
+    <string name="next">NEXT</string>
+    <string name="previous">PREVIOUS</string>
+    <string name="done">DONE</string>
+    <string name="back">Back</string>
+    <string name="close">Close</string>
+    <string name="show_password">Show password</string>
+    <string name="hide_password">Hide password</string>
+    <string name="forgot_password">FORGOT PASSWORD?</string>
+    <string name="sign_in">Sign in</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="email">Email</string>
+    <string name="or">or</string>
+    <string name="sign_in_guest">SIGN IN AS GUEST</string>
+    <string name="invalid_password">Invalid password</string>
+    <string name="invalid_email">Invalid email</string>
+    <string name="share_article">Share Article</string>
+
+    <string name="bad_network_view_tip">Your network is not to force, can tap the screen to reload</string>
+    <string name="load_failed_click_to_reload">Failed to load, click to reload</string>
+    <string name="failed_load_data">Failed to load data</string>
+
+</resources>

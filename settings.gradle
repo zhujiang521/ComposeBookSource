@@ -1,0 +1,20 @@
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+        jcenter() // Warning: this repository is going to shut down soon
+    }
+}
+rootProject.name = "Compose"
+include ':one'
+include ':two'
+include ':three'
+include ':four'
+include ':five'
+include ':six'
+include ':seven'
+include ':eight'
+include ':nine'
+include ':ten'
