@@ -17,8 +17,12 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dev.chrisbanes.accompanist.coil.CoilImage
+import coil.Coil
+import coil.annotation.ExperimentalCoilApi
+import coil.compose.LocalImageLoader
+import coil.compose.rememberImagePainter
 
+@OptIn(ExperimentalCoilApi::class)
 @Composable
 fun ImageTest() {
 //    Image(painter = painterResource(R.drawable.ic_launcher_background), "描述")
@@ -50,9 +54,13 @@ fun ImageTest() {
 //        contentDescription = "描述", colorFilter = ColorFilter.tint(Color.Red)
 //    )
 
-    CoilImage(
+    val painter = rememberImagePainter(
         data = "https://img0.baidu.com/it/u=3155998395,3600507640&fm=26&fmt=auto&gp=0.jpg",
-        contentDescription = null
+        imageLoader = LocalImageLoader.current,
+    )
+    Image(
+        painter = painter,
+        contentDescription = "",
     )
 
 }
