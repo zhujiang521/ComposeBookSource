@@ -61,6 +61,7 @@ fun ArticlePage(
                     .fillMaxSize()
             ) { view ->
                 view.webViewClient = object : WebViewClient() {
+                    @Deprecated("Deprecated in Java")
                     override fun shouldOverrideUrlLoading(view: WebView?, url: String): Boolean {
                         return try {
                             if (url.startsWith("http:") || url.startsWith("https:")) {
