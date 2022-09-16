@@ -37,7 +37,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion compose_version
+        kotlinCompilerExtensionVersion compose_compiler_version
     }
 }
 
@@ -50,10 +50,10 @@ dependencies {
     implementation "androidx.compose.material:material:$compose_version"
     implementation "androidx.compose.ui:ui-tooling:$compose_version"
     implementation "androidx.compose.runtime:runtime-livedata:$compose_version"
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-rc01'
-    implementation 'androidx.activity:activity-compose:1.4.0'
-    implementation 'androidx.navigation:navigation-runtime-ktx:2.3.5'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1'
+    implementation des.lifecycleRuntime
+    implementation des.activityCompose
+    implementation 'androidx.navigation:navigation-runtime-ktx:2.5.1'
     testImplementation des.junit
     androidTestImplementation des.extJunit
     androidTestImplementation des.espressoCore
