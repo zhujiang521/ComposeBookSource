@@ -2,11 +2,13 @@ package com.zj.seven
 
 import android.util.Log
 import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.tooling.preview.Preview
@@ -37,18 +39,27 @@ fun AnimateAsStateTest() {
 //    }
 
     var isSmall by remember { mutableStateOf(true) }
-    val size: Dp by animateDpAsState(if (isSmall) 40.dp else 100.dp,){
+    val size: Dp by animateDpAsState(
+        targetValue = if (isSmall) 40.dp else 100.dp,
+        animationSpec = tween(durationMillis = 1500)
+    ) {
         Log.e("ZHUJIANG", "AnimateAsStateTest: $it")
     }
-    Column(Modifier.padding(16.dp)) {
+
+
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
         Button(
             onClick = { isSmall = !isSmall },
-            modifier = Modifier.padding(vertical = 16.dp)
         ) {
-            Text("Change Size Dp")
+            Text("修改Dp值")
         }
         Box(
-            Modifier.size(size).background(Red)
+            modifier = Modifier
+                .size(size)
+                .background(Red)
         )
     }
 

@@ -24,13 +24,13 @@ class MainActivity : ComponentActivity() {
 //                    Greeting("Android")
 //                    EasyAnimation()
 //                    BottomNavigationTest()
-//                    AnimateAsStateTest()
+                    AnimateAsStateTest()
 //                    AnimatableTest()
 //                    TransitionTest()
 //                    InfiniteTransitionTest()
 //                    ScrollTest()
 //                    ScrollTest2()
-                    SwipeableSample()
+//                    SwipeableSample()
                 }
             }
         }
