@@ -10,7 +10,7 @@ ext {
     des = [
             kotlinVersion   : "org.jetbrains.kotlin:kotlin-stdlib:1.7.0",
             coreKtx         : 'androidx.core:core-ktx:1.8.0',
-            appcompat       : 'androidx.appcompat:appcompat:1.5.0',
+            appcompat       : 'androidx.appcompat:appcompat:1.5.1',
             material        : 'com.google.android.material:material:1.6.1',
             lifecycleRuntime: 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1',
             activityCompose : 'androidx.activity:activity-compose:1.5.1',
