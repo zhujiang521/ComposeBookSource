@@ -98,9 +98,15 @@ private fun BoxSizeSpec(): @Composable() (Transition.Segment<BoxState>.() -> Fin
     {
         when {
             BoxState.Small isTransitioningTo BoxState.Large ->
-                tween(durationMillis = 300, easing = FastOutSlowInEasing)
+                spring(
+                    dampingRatio = Spring.DampingRatioLowBouncy,
+                    stiffness = Spring.StiffnessLow
+                )
             else ->
-                tween(durationMillis = 300, easing = FastOutLinearInEasing)
+                spring(
+                    dampingRatio = Spring.DampingRatioLowBouncy,
+                    stiffness = Spring.StiffnessLow
+                )
         }
     }
 
