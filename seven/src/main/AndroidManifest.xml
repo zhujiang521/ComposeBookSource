@@ -12,9 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Seven">
         <activity
-            android:name=".dynamic.DynamicActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
@@ -25,14 +22,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <receiver
-            android:name=".dynamic.BatteryReceiver"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.BATTERY_CHANGED" />
-            </intent-filter>
-        </receiver>
     </application>
 
 </manifest>

@@ -5,82 +5,44 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.graphics.PixelFormat
 import android.os.BatteryManager
-import android.util.AttributeSet
-import android.view.Gravity
-import android.view.WindowManager
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.AbstractComposeView
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-@Composable
-fun SystemBroadcastReceiver(
-    systemAction: String,
-    onSystemEvent: (intent: Intent?) -> Unit
-) {
-    // Grab the current context in this part of the UI tree
-    val context = LocalContext.current
-
-    // Safely use the latest onSystemEvent lambda passed to the function
-    val currentOnSystemEvent by rememberUpdatedState(onSystemEvent)
-
-    // If either context or systemAction changes, unregister and register again
-    DisposableEffect(context, systemAction) {
-        val intentFilter = IntentFilter(systemAction)
-        val broadcast = object : BroadcastReceiver() {
-            override fun onReceive(context: Context?, intent: Intent?) {
-                currentOnSystemEvent(intent)
-            }
-        }
-
-        context.registerReceiver(broadcast, intentFilter)
-
-        // When the effect leaves the Composition, remove the callback
-        onDispose {
-            context.unregisterReceiver(broadcast)
-        }
-    }
-}
 
 @SuppressLint("UnusedTransitionTargetStateParameter")
 @Composable
 fun DynamicScreen() {
-    var boxState: BoxState by remember { mutableStateOf(BoxState.Small) }
-    SystemBroadcastReceiver(Intent.ACTION_BATTERY_CHANGED) { batteryStatus ->
-        if (batteryStatus == null) return@SystemBroadcastReceiver
-        val status =
-            batteryStatus.getIntExtra("status", BatteryManager.BATTERY_STATUS_UNKNOWN)  /// 充电状态
-        val isCharge =
-            status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL ///获取电池状态
-        boxState = if (isCharge) BoxState.Large else BoxState.Small
-    }
+    var boxState: BoxState by remember { mutableStateOf(BoxState.NormalState) }
 
     val transition = updateTransition(targetState = boxState, label = "transition ")
 
-    val boxHeight by transition.animateDp(label = "height", transitionSpec = BoxSizeSpec()) {
+    val boxHeight by transition.animateDp(label = "height", transitionSpec = boxSizeSpec()) {
         boxState.height
     }
-    val boxWidth by transition.animateDp(label = "width", transitionSpec = BoxSizeSpec()) {
+    val boxWidth by transition.animateDp(label = "width", transitionSpec = boxSizeSpec()) {
         boxState.width
     }
 
     Column(
-        modifier = Modifier.fillMaxSize().padding(top = 3.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(top = 3.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
+       
         Box(
             modifier = Modifier
                 .width(boxWidth)
@@ -88,32 +50,66 @@ fun DynamicScreen() {
                 .shadow(elevation = 3.dp, shape = RoundedCornerShape(15.dp))
                 .background(color = Color.Black),
             contentAlignment = Alignment.Center,
-        ) {
-            Text(text = if (boxState is BoxState.Large) "正在充电" else "没充", color = Color.White)
+        ) {}
+
+        Button(
+            modifier = Modifier.padding(top = 30.dp, bottom = 5.dp),
+            onClick = { boxState = BoxState.NormalState }) {
+            Text(text = "默认状态")
         }
+
+        Button(
+            modifier = Modifier.padding(vertical = 5.dp),
+            onClick = { boxState = BoxState.ChargeState }) {
+            Text(text = "充电状态")
+        }
+
+        Button(
+            modifier = Modifier.padding(vertical = 5.dp),
+            onClick = { boxState = BoxState.PayState }) {
+            Text(text = "支付状态")
+        }
+
+        Button(
+            modifier = Modifier.padding(vertical = 5.dp),
+            onClick = { boxState = BoxState.MusicState }) {
+            Text(text = "音乐状态")
+        }
+
+        Button(
+            modifier = Modifier.padding(vertical = 5.dp),
+            onClick = { boxState = BoxState.MoreState }) {
+            Text(text = "多个状态")
+        }
+
     }
 }
 
+/**
+ * 动画规格设置
+ */
 @Composable
-private fun BoxSizeSpec(): @Composable() (Transition.Segment<BoxState>.() -> FiniteAnimationSpec<Dp>) =
+private fun boxSizeSpec(): @Composable() (Transition.Segment<BoxState>.() -> FiniteAnimationSpec<Dp>) =
     {
-        when {
-            BoxState.Small isTransitioningTo BoxState.Large ->
-                spring(
-                    dampingRatio = Spring.DampingRatioMediumBouncy,
-                    stiffness = Spring.StiffnessMediumLow
-                )
-            else ->
-                spring(
-                    dampingRatio = Spring.DampingRatioMediumBouncy,
-                    stiffness = Spring.StiffnessMediumLow
-                )
-        }
+        spring(
+            dampingRatio = Spring.DampingRatioLowBouncy,
+            stiffness = Spring.StiffnessMediumLow
+        )
     }
 
 private sealed class BoxState(val height: Dp, val width: Dp) {
-    operator fun not() = if (this is Small) Large else Small
+    // 默认状态
+    object NormalState : BoxState(30.dp, 100.dp)
 
-    object Small : BoxState(30.dp, 100.dp)
-    object Large : BoxState(30.dp, 170.dp)
+    // 充电状态
+    object ChargeState : BoxState(30.dp, 170.dp)
+
+    // 支付状态
+    object PayState : BoxState(100.dp, 100.dp)
+
+    // 音乐状态
+    object MusicState : BoxState(170.dp, 340.dp)
+
+    // 多个状态
+    object MoreState : BoxState(30.dp, 170.dp)
 }

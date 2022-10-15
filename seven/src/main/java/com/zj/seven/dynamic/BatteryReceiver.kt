@@ -3,37 +3,49 @@ package com.zj.seven.dynamic
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.BatteryManager
 import android.util.Log
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.ui.platform.LocalContext
 
-class BatteryReceiver : BroadcastReceiver() {
+@Composable
+fun SystemBroadcastReceiver(
+    systemAction: String,
+    onSystemEvent: (intent: Intent?) -> Unit
+) {
+    // Grab the current context in this part of the UI tree
+    val context = LocalContext.current
 
-    companion object {
-        private const val TAG = "BatteryReceiver"
-    }
+    // Safely use the latest onSystemEvent lambda passed to the function
+    val currentOnSystemEvent by rememberUpdatedState(onSystemEvent)
 
-    override fun onReceive(context: Context?, intent: Intent?) {
-        if (intent == null) {
-            Log.w(TAG, "intent is null")
-            return
+    // If either context or systemAction changes, unregister and register again
+    DisposableEffect(context, systemAction) {
+        val intentFilter = IntentFilter(systemAction)
+        val broadcast = object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                currentOnSystemEvent(intent)
+            }
         }
-        val battery = intent.getIntExtra("level", 0)    ///电池剩余电量
-        val status = intent.getIntExtra("status", BatteryManager.BATTERY_STATUS_UNKNOWN)  /// 充电状态
-        val isCharge =
-            status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL ///获取电池状态
 
-        Log.w(TAG, "battery:battery isCharge:$isCharge")
-//        intent.getIntExtra("scale", 0);  ///获取电池满电量数值
-//        intent.getStringExtra("technology");  ///获取电池技术支持
-//        intent.getIntExtra("plugged", 0);  ///获取电源信息
-//        intent.getIntExtra("health",BatteryManager.BATTERY_HEALTH_UNKNOWN);  ///获取电池健康度
-//        intent.getIntExtra("voltage", 0);  ///获取电池电压
-//        intent.getIntExtra("temperature", 0);  ///获取电池温度
+        context.registerReceiver(broadcast, intentFilter)
 
-//        context?.startActivity(Intent(context, DynamicActivity::class.java).apply {
-//            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-//        })
-
+        // When the effect leaves the Composition, remove the callback
+        onDispose {
+            context.unregisterReceiver(broadcast)
+        }
     }
-
 }
+
+//    SystemBroadcastReceiver(Intent.ACTION_BATTERY_CHANGED) { batteryStatus ->
+//        if (batteryStatus == null) return@SystemBroadcastReceiver
+//        val status =
+//            batteryStatus.getIntExtra("status", BatteryManager.BATTERY_STATUS_UNKNOWN)  /// 充电状态
+//        val isCharge =
+//            status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL ///获取电池状态
+//        boxState = if (isCharge) BoxState.ChargeState else BoxState.NormalState
+//    }
