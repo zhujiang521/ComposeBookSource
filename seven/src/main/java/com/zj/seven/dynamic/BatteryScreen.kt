@@ -11,6 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -21,18 +22,25 @@ import androidx.compose.ui.unit.dp
 fun DynamicScreen() {
     var boxState: BoxState by remember { mutableStateOf(BoxState.NormalState) }
 
-    val transition = updateTransition(targetState = boxState, label = "transition ")
-
-    val boxHeight by transition.animateDp(label = "height", transitionSpec = boxSizeSpec()) {
-        boxState.height
-    }
-    val boxWidth by transition.animateDp(label = "width", transitionSpec = boxSizeSpec()) {
-        boxState.width
-    }
+//    val transition = updateTransition(targetState = boxState, label = "transition ")
+//
+//    val boxHeight by transition.animateDp(label = "height", transitionSpec = boxSizeSpec()) {
+//        boxState.height
+//    }
+//    val boxWidth by transition.animateDp(label = "width", transitionSpec = boxSizeSpec()) {
+//        boxState.width
+//    }
 
     val animateDpAsState by animateDpAsState(
         targetValue = if (boxState is BoxState.MoreState) 105.dp else 50.dp,
-        animationSpec =  spring(
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioLowBouncy,
+            stiffness = Spring.StiffnessMediumLow
+        )
+    )
+
+    val animateSizeAsState by animateSizeAsState(
+        targetValue = Size(boxState.width.value, boxState.height.value), animationSpec = spring(
             dampingRatio = Spring.DampingRatioLowBouncy,
             stiffness = Spring.StiffnessMediumLow
         )
@@ -47,11 +55,18 @@ fun DynamicScreen() {
         Box {
             Box(
                 modifier = Modifier
-                    .width(boxWidth)
-                    .height(boxHeight)
+                    .width(animateSizeAsState.width.dp)
+                    .height(animateSizeAsState.height.dp)
                     .shadow(elevation = 3.dp, shape = RoundedCornerShape(15.dp))
                     .background(color = Color.Black),
             )
+//            Box(
+//                modifier = Modifier
+//                    .width(boxWidth)
+//                    .height(boxHeight)
+//                    .shadow(elevation = 3.dp, shape = RoundedCornerShape(15.dp))
+//                    .background(color = Color.Black),
+//            )
             Box(
                 modifier = Modifier
                     .padding(start = animateDpAsState)
