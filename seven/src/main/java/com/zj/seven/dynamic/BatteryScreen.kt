@@ -13,6 +13,7 @@ import android.view.WindowManager
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
@@ -77,7 +78,7 @@ fun DynamicScreen() {
     }
 
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize().padding(top = 3.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Box(
@@ -99,13 +100,13 @@ private fun BoxSizeSpec(): @Composable() (Transition.Segment<BoxState>.() -> Fin
         when {
             BoxState.Small isTransitioningTo BoxState.Large ->
                 spring(
-                    dampingRatio = Spring.DampingRatioLowBouncy,
-                    stiffness = Spring.StiffnessLow
+                    dampingRatio = Spring.DampingRatioMediumBouncy,
+                    stiffness = Spring.StiffnessMediumLow
                 )
             else ->
                 spring(
-                    dampingRatio = Spring.DampingRatioLowBouncy,
-                    stiffness = Spring.StiffnessLow
+                    dampingRatio = Spring.DampingRatioMediumBouncy,
+                    stiffness = Spring.StiffnessMediumLow
                 )
         }
     }
@@ -113,6 +114,6 @@ private fun BoxSizeSpec(): @Composable() (Transition.Segment<BoxState>.() -> Fin
 private sealed class BoxState(val height: Dp, val width: Dp) {
     operator fun not() = if (this is Small) Large else Small
 
-    object Small : BoxState(35.dp, 100.dp)
-    object Large : BoxState(70.dp, 300.dp)
+    object Small : BoxState(30.dp, 100.dp)
+    object Large : BoxState(30.dp, 170.dp)
 }
