@@ -1,11 +1,6 @@
 package com.zj.seven.dynamic
 
 import android.annotation.SuppressLint
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
-import android.os.BatteryManager
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -17,7 +12,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
@@ -36,21 +30,36 @@ fun DynamicScreen() {
         boxState.width
     }
 
+    val animateDpAsState by animateDpAsState(
+        targetValue = if (boxState is BoxState.MoreState) 105.dp else 50.dp,
+        animationSpec =  spring(
+            dampingRatio = Spring.DampingRatioLowBouncy,
+            stiffness = Spring.StiffnessMediumLow
+        )
+    )
+
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(top = 3.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-       
-        Box(
-            modifier = Modifier
-                .width(boxWidth)
-                .height(boxHeight)
-                .shadow(elevation = 3.dp, shape = RoundedCornerShape(15.dp))
-                .background(color = Color.Black),
-            contentAlignment = Alignment.Center,
-        ) {}
+        Box {
+            Box(
+                modifier = Modifier
+                    .width(boxWidth)
+                    .height(boxHeight)
+                    .shadow(elevation = 3.dp, shape = RoundedCornerShape(15.dp))
+                    .background(color = Color.Black),
+            )
+            Box(
+                modifier = Modifier
+                    .padding(start = animateDpAsState)
+                    .size(30.dp)
+                    .shadow(elevation = 3.dp, shape = RoundedCornerShape(15.dp))
+                    .background(color = Color.Black)
+            )
+        }
 
         Button(
             modifier = Modifier.padding(top = 30.dp, bottom = 5.dp),
@@ -111,5 +120,5 @@ private sealed class BoxState(val height: Dp, val width: Dp) {
     object MusicState : BoxState(170.dp, 340.dp)
 
     // 多个状态
-    object MoreState : BoxState(30.dp, 170.dp)
+    object MoreState : BoxState(30.dp, 100.dp)
 }
