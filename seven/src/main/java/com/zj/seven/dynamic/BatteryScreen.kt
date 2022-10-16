@@ -31,13 +31,16 @@ fun DynamicScreen() {
 //        boxState.width
 //    }
 
-    val animateDpAsState by animateDpAsState(
-        targetValue = if (boxState is BoxState.MoreState) 105.dp else 50.dp,
-        animationSpec = spring(
-            dampingRatio = Spring.DampingRatioLowBouncy,
-            stiffness = Spring.StiffnessMediumLow
-        )
-    )
+//    val animateDpAsState by animateDpAsState(
+//        targetValue = if (boxState is BoxState.MoreState) 105.dp else 50.dp,
+//        animationSpec = spring(
+//            dampingRatio = Spring.DampingRatioLowBouncy,
+//            stiffness = Spring.StiffnessMediumLow
+//        )
+//    )
+
+    val animateFloatAsState by
+    animateFloatAsState(targetValue = if (boxState is BoxState.MoreState) 35f else 0f)
 
     val animateSizeAsState by animateSizeAsState(
         targetValue = Size(boxState.width.value, boxState.height.value), animationSpec = spring(
@@ -67,13 +70,18 @@ fun DynamicScreen() {
 //                    .shadow(elevation = 3.dp, shape = RoundedCornerShape(15.dp))
 //                    .background(color = Color.Black),
 //            )
-            Box(
-                modifier = Modifier
-                    .padding(start = animateDpAsState)
-                    .size(30.dp)
-                    .shadow(elevation = 3.dp, shape = RoundedCornerShape(15.dp))
-                    .background(color = Color.Black)
-            )
+
+            // 博客中的方案
+//            Box(
+//                modifier = Modifier
+//                    .padding(start = animateDpAsState)
+//                    .size(30.dp)
+//                    .shadow(elevation = 3.dp, shape = RoundedCornerShape(15.dp))
+//                    .background(color = Color.Black)
+//            )
+
+            // 绘制水滴
+            CanvasDropWater(animateFloatAsState)
         }
 
         Button(
